@@ -29,7 +29,7 @@ ppmw
 
 Alternatively, you can copy the binary to /usr/local/bin
 ```sh
-cp target/release/ppmw
+cp target/release/ppmw /usr/local/bin
 ```
 
 This also allows you to run the program from anywhere without the need to maintain an alias
