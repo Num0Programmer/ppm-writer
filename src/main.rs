@@ -9,7 +9,7 @@ fn main() -> Result<()>
         args[0].parse().unwrap(),
         args[1].parse().unwrap()
     );
-    let buf: Vec<u8> = vec![0; header.width * header.height];
+    let buf: Vec<u8> = vec![0; header.width * header.height * 3];
 
     header.write_buf("sample.ppm", &buf)?;
 
