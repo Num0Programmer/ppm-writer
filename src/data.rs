@@ -1,6 +1,6 @@
 use std::{
     fs::File,
-    io::{Write, Result}
+    io::Write
 };
 
 /// Holds metadata for a PPM file
@@ -25,34 +25,16 @@ impl Header
         }
     }
     
-    pub fn write_buf(self, path: &str, buf: &Vec<u8>) -> Result<()>
+    pub fn write_buf(self, path: &str, buf: &Vec<u8>)
     {
-        let mut file = File::create(path)?;
-        writeln!(&mut file, "{}", self.format)?;
-        writeln!(&mut file, "{} {}", self.width, self.height)?;
-        writeln!(&mut file, "{}", self.max)?;
+        let mut file = File::create(path).unwrap();
+        writeln!(&mut file, "{}", self.format).unwrap();
+        writeln!(&mut file, "{} {}", self.width, self.height).unwrap();
+        writeln!(&mut file, "{}", self.max).unwrap();
 
         for byte in buf
         {
-            writeln!(&mut file, "{}", byte)?;
-        }
-
-        Ok(())
-    }
-}
-
-impl Default for Header
-{
-    /// forces a P3 ppm file with dimensions of 64 64 and max color value of
-    /// 255
-    fn default() -> Self
-    {
-        Self
-        {
-            format: String::from("P3"),
-            width: 64,
-            height: 64,
-            max: 255
+            writeln!(&mut file, "{}", byte).unwrap();
         }
     }
 }
