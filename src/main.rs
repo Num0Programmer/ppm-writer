@@ -3,11 +3,13 @@ use data::Header;
 
 fn main() -> Result<()>
 {
-    // TODO: incorporate invokation arguments later
-    // let args: Vec<_> = env::args().collect();
+    let args: Vec<String> = env::args().collect();
 
-    let header = Header::default();
-    let buf: Vec<u8> = vec![0; 12288];  // magic number for 64 * 64 * 3
+    let header = Header::new(
+        args[0].parse().unwrap(),
+        args[1].parse().unwrap()
+    );
+    let buf: Vec<u8> = vec![0; header.width * header.height];
 
     header.write_buf("sample.ppm", &buf)?;
 

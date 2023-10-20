@@ -7,13 +7,24 @@ use std::{
 pub struct Header
 {
     format: String,
-    width: String,
-    height: String,
-    max: String
+    pub width: usize,
+    pub height: usize,
+    max: usize
 }
 
 impl Header
 {
+    pub fn new(width: usize, height: usize) -> Self
+    {
+        Self
+        {
+            format: String::from("P3"),
+            width,
+            height,
+            max: 255
+        }
+    }
+    
     pub fn write_buf(self, path: &str, buf: &Vec<u8>) -> Result<()>
     {
         let mut file = File::create(path)?;
@@ -32,14 +43,16 @@ impl Header
 
 impl Default for Header
 {
+    /// forces a P3 ppm file with dimensions of 64 64 and max color value of
+    /// 255
     fn default() -> Self
     {
         Self
         {
             format: String::from("P3"),
-            width: String::from("64"),
-            height: String::from("64"),
-            max: String::from("255")
+            width: 64,
+            height: 64,
+            max: 255
         }
     }
 }
