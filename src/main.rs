@@ -1,15 +1,22 @@
-use std::{env, io::Result};
-use data::Header;
+use std::env;
+use ppm_writer::*;
 
-fn main() -> Result<()>
+fn main()
 {
-    // TODO: incorporate invokation arguments later
-    // let args: Vec<_> = env::args().collect();
+    let args: Vec<String> = env::args().collect();
 
-    let header = Header::default();
-    let buf: Vec<u8> = vec![0; 12288];  // magic number for 64 * 64 * 3
+    if args.len() < 4
+    {
+        println!("Missing an image filepath/name, width and height!");
+    }
+    else
+    {        
+        let header = Header::new(
+            args[WIDTH_ACCESS].parse().unwrap(),
+            args[HEIGHT_ACCESS].parse().unwrap()
+        );
+        let buf: Vec<u8> = vec![0; header.width * header.height * 3];
 
-    header.write_buf("sample.ppm", &buf)?;
-
-    Ok(())
+        header.write_buf(&args[FILEPATH_ACCESS], &buf);
+    }
 }
