@@ -3,6 +3,10 @@ use std::{
     io::Write
 };
 
+pub const FILEPATH_ACCESS: usize = 1;
+pub const WIDTH_ACCESS: usize = 2;
+pub const HEIGHT_ACCESS: usize = 3;
+
 /// Holds metadata for a PPM file
 pub struct Header
 {
