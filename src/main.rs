@@ -17,6 +17,6 @@ fn main()
         );
         let buf: Vec<u8> = vec![0; header.width * header.height * 3];
 
-        header.write_buf(&args[FILEPATH_ACCESS], &buf);
+        header.write_buffer(&args[FILEPATH_ACCESS], &buf);
     }
 }

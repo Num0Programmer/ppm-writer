@@ -29,7 +29,7 @@ impl Header
         }
     }
     
-    pub fn write_buf(self, path: &str, buf: &Vec<u8>)
+    pub fn write_buffer(self, path: &str, buf: &Vec<u8>)
     {
         let mut file = File::create(path).unwrap();
         writeln!(&mut file, "{}", self.format).unwrap();
